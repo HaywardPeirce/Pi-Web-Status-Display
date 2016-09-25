@@ -1,5 +1,5 @@
 # Pi-Web-Status-Display
-A Raspberry Pi-based project for tracking certain network metrics. 
+A Raspberry Pi-based project for tracking and displaying certain network metrics.
 
 Currently the system keeps track of the:
 
@@ -8,6 +8,8 @@ Currently the system keeps track of the:
 - Min Ping
 - Average Ping
 - Max Ping
+
+THe metrics are then displayed on an HDD44780 compatible LCD and through Adafruit.io
 
 ### Resources
 THe main reference for this project was the Adafruit LCD guide: https://learn.adafruit.com/drive-a-16x2-lcd-directly-with-a-raspberry-pi/overview
