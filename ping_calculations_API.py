@@ -1,6 +1,6 @@
 import requests
 
-resp = requests.get('https://io.adafruit.com/api/feeds/ping/data', headers={'x-aio-key':'800d2675535848f38bb7168ef678b97f'})
+resp = requests.get('https://io.adafruit.com/api/feeds/ping/data', headers={'x-aio-key':'YOUR_ADAFRUIT_API_KEY'})
 if resp.status_code != 200:
     # This means something went wrong.
     raise ApiError('GET /tasks/ {}'.format(resp.status_code))
