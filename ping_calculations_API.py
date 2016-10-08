@@ -35,7 +35,7 @@ avg_url = "https://io.adafruit.com/api/feeds/ping-avg/data"
 
 avg_payload = "{\n\t\"value\":\"" + str(ping_avg) + "\"\n}"
 avg_headers = {
-    'x-aio-key': "800d2675535848f38bb7168ef678b97f",
+    'x-aio-key': "YOUR_ADAFRUIT_API_KEY",
     'content-type': "application/json"
     }
 
@@ -47,7 +47,7 @@ min_url = "https://io.adafruit.com/api/feeds/ping-min/data"
 
 min_payload = "{\n\t\"value\":\"" + str(ping_min) + "\"\n}"
 min_headers = {
-    'x-aio-key': "800d2675535848f38bb7168ef678b97f",
+    'x-aio-key': "YOUR_ADAFRUIT_API_KEY",
     'content-type': "application/json"
     }
 
@@ -59,7 +59,7 @@ max_url = "https://io.adafruit.com/api/feeds/ping-max/data"
 
 max_payload = "{\n\t\"value\":\"" + str(ping_max) + "\"\n}"
 max_headers = {
-    'x-aio-key': "800d2675535848f38bb7168ef678b97f",
+    'x-aio-key': "YOUR_ADAFRUIT_API_KEY",
     'content-type': "application/json"
     }
 
