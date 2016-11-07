@@ -25,6 +25,8 @@ Follow the Adafruit installation guide for wiring and testing out the display
 
 Place the python script you want to run in the `Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/` directory. You can place it elsewhere but you will have to reference the python library `Adafruit_CharLCD` by its absolute path
 
+Place the Adafruit APIkey in a files in the pi user home directory called apikey.txt
+
 Install Upstart with: `sudo apt-get install upstart`
 
 Place the networktestservice.conf file in /etc/init
