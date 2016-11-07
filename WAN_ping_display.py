@@ -1,13 +1,20 @@
 #!/usr/bin/env python
 
+import os
+import os.path
 from Adafruit_CharLCD import Adafruit_CharLCD
 from subprocess import *
 from time import sleep, strftime
 from datetime import datetime
 
+#Read the Adafruit API key in from file /home/pi/apikey.txt.
+file = open('/home/pi/apikey.txt', 'r')
+apikey = file.readline().replace("\n", '')
+file.close()
+
 # Import library and create instance of REST client.
 from Adafruit_IO import Client
-aio = Client('')
+aio = Client(apikey)
 
 lcd = Adafruit_CharLCD()
 
