@@ -11,6 +11,30 @@ Currently the system keeps track of the:
 
 THe metrics are then displayed on an HDD44780 compatible LCD and through Adafruit.io
 
+### Installing the display script
+Follow the Adafruit installation guide for wiring and testing out the display
+
+Place the python script you want to run in the `Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/` directory. You can place it elsewhere but you will have to reference the python library `Adafruit_CharLCD` by its absolute path
+
+Place the Adafruit APIkey in a file in the pi user home directory called apikey.txt
+
+Place the OpenWeatherMap API key in a file in the pi user home directory called weatherapikey.txt
+
+Install Upstart with: `sudo apt-get install upstart`
+
+Place the networktestservice.conf file in /etc/init
+
+Reboot the Pi
+
+#### Installing the calculation script
+
+Create a cron job: `crontab-e`
+
+Add a line at the bottom of the file similar to this: `* */24 * * * python /home/pi/ping_calculations.py`
+
+Make sure to replace `/home/pi/ping_calculations.py` with the full location and name of the `ping_calculations.py` file 
+
+
 ### Resources
 THe main reference for this project was the Adafruit LCD guide: https://learn.adafruit.com/drive-a-16x2-lcd-directly-with-a-raspberry-pi/overview
 
@@ -20,17 +44,7 @@ Information on how to create an Upstart Service was found here: https://stackove
 
 Details about including Adafruit.io were found here: https://github.com/adafruit/io-client-python
 
-### Installation
-Follow the Adafruit installation guide for wiring and testing out the display
 
-Place the python script you want to run in the `Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/` directory. You can place it elsewhere but you will have to reference the python library `Adafruit_CharLCD` by its absolute path
 
-Place the Adafruit APIkey in a files in the pi user home directory called apikey.txt
-
-Install Upstart with: `sudo apt-get install upstart`
-
-Place the networktestservice.conf file in /etc/init
-
-Reboot the Pi
 
 

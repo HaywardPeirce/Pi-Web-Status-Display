@@ -2,10 +2,18 @@
 
 import os
 import os.path
-from Adafruit_CharLCD import Adafruit_CharLCD
 from subprocess import *
 from time import sleep, strftime
 from datetime import datetime
+import highping
+import temerature
+
+#from Adafruit_CharLCD import Adafruit_CharLCD
+#/Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD
+
+import imp
+
+Adafruit_CharLCD = imp.load_source('Adafruit_CharLCD', '/home/pi/Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/Adafruit_CharLCD.py')
 
 #Read the Adafruit API key in from file /home/pi/apikey.txt.
 file = open('/home/pi/apikey.txt', 'r')
@@ -55,18 +63,24 @@ while 1:
 	    pingmax = pingnum
         if pingnum < pingmin:
 	    pingmin = pingnum
-
-#    pingplus = float(pingnum) +1
-#    lcd.message(datetime.now().strftime('%b %d  %H:%M:%S\n'))
-#    lcd.message('LAN IP %s' % (localipaddr))
+	    
+	    #send the ping value to the highping function
+	    highping.main(pingnum)
+	    
+	    #find the local temp, using the openweathermap city ID
+	    localtemp = temerature.local(6174041)
+	    
+	    roomtemp = temerature.room(apikey, 'temerature', 'temerature-2')
+	    
         lcd.setCursor(0, 0)
         lcd.message('WANIP %s' % (wanipaddr))
-#    lcd.setCursor(0, 2)
-#    lcd.message('WAN 192.168.100.100')
+
         lcd.setCursor(0, 1)
         lcd.message('Ping %0.2f' % (pingnum))
         lcd.setCursor(0, 2)
         lcd.message('%0.2f %0.2f %0.2f' % (pingavg, pingmin, pingmax))
+        lcd.setCursor(0, 3)
+        lcd.message('temp: %0.2f room: %0.2f' % (localtemp, roomtemp))
         
         aio.send('wan-ip', wanipaddr)
         aio.send('ping', pingnum)

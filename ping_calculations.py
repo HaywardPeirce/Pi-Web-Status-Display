@@ -5,7 +5,7 @@ count = 0
 ping_list = []
 ping_avg = 0
 
-# Get an array of all data from feed 'Test'
+# Get an array of all data from feed 'ping'
 ping_data = aio.data('ping')
 
 # Print out all the results.
@@ -35,6 +35,8 @@ for ping in ping_list:
 #print('Low Ping Min: ', ping_min)
 #print('High Ping Max: ', ping_max)
 
+
+#return the average, min, and max values to adafruit
 aio.send('ping_avg', ping_avg)
 aio.send('ping_min', ping_min)
 aio.send('ping_max', ping_max)
