@@ -30,7 +30,8 @@ def room(apikey, *feeds):
     aio = Client(apikey)
     
     for feed in feeds:
-        temp.append(float(aio.receive(feed)))
+        iotemp = aio.receive(feed)
+        temp.append(float(iotemp.value))
         
     roomtemp = sum(temp)/len(temp)
     return roomtemp

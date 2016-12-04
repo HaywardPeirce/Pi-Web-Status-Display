@@ -6,7 +6,7 @@ from subprocess import *
 from time import sleep, strftime
 from datetime import datetime
 import highping
-import temerature
+import temperature
 
 #from Adafruit_CharLCD import Adafruit_CharLCD
 #/Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD
@@ -15,8 +15,10 @@ import imp
 
 Adafruit_CharLCD = imp.load_source('Adafruit_CharLCD', '/home/pi/Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/Adafruit_CharLCD.py')
 
+from Adafruit_CharLCD import Adafruit_CharLCD
+
 #Read the Adafruit API key in from file /home/pi/apikey.txt.
-file = open('/home/pi/apikey.txt', 'r')
+file = open('./apikey.txt', 'r')
 apikey = file.readline().replace("\n", '')
 file.close()
 
@@ -58,19 +60,19 @@ while 1:
 
         count = count + 1
         if count > 1:
-	    pingavg = (pingavg * (count - 1) / count) + (pingnum / count)
+	        pingavg = (pingavg * (count - 1) / count) + (pingnum / count)
         if pingnum > pingmax:
-	    pingmax = pingnum
+	        pingmax = pingnum
         if pingnum < pingmin:
-	    pingmin = pingnum
+	        pingmin = pingnum
 	    
-	    #send the ping value to the highping function
-	    highping.main(pingnum)
+        #send the ping value to the highping function
+        highping.main(pingnum)
 	    
-	    #find the local temp, using the openweathermap city ID
-	    localtemp = temerature.local(6174041)
+        #find the local temp, using the openweathermap city ID
+        localtemp = temperature.local(6174041)
 	    
-	    roomtemp = temerature.room(apikey, 'temerature', 'temerature-2')
+        roomtemp = temperature.room(apikey, 'temperature', 'temperature-2')
 	    
         lcd.setCursor(0, 0)
         lcd.message('WANIP %s' % (wanipaddr))
@@ -80,7 +82,7 @@ while 1:
         lcd.setCursor(0, 2)
         lcd.message('%0.2f %0.2f %0.2f' % (pingavg, pingmin, pingmax))
         lcd.setCursor(0, 3)
-        lcd.message('temp: %0.2f room: %0.2f' % (localtemp, roomtemp))
+        lcd.message('temp:%0.1f room:%0.1f' % (localtemp, roomtemp))
         
         aio.send('wan-ip', wanipaddr)
         aio.send('ping', pingnum)
