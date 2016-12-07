@@ -18,14 +18,14 @@ def main(ping):
 def fileWrite(ping):
     ping = str(ping)
     
-    f = open('./highpings.txt', 'a')
+    f = open('home/pi/Pi-Web-Status-Display/highpings.txt', 'a')
     print(time.strftime("%c") + " -- Ping : " + ping + "ms", file=f)
     print(time.strftime("%c") + " -- Ping : " + ping + "ms")
     f.close()
     
     currentTime = str(time.time( ))
     
-    f = open('./highpings.csv', 'a')
+    f = open('home/pi/Pi-Web-Status-Display/highpings.csv', 'a')
     print(currentTime + ", " + ping, file=f)
     print(currentTime + ", " + ping)
     f.close()
