@@ -14,11 +14,11 @@ THe metrics are then displayed on an HDD44780 compatible LCD and through Adafrui
 ### Installing the display script
 Follow the Adafruit installation guide for wiring and testing out the display
 
-Place the python script you want to run in the `Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/` directory. You can place it elsewhere but you will have to reference the python library `Adafruit_CharLCD` by its absolute path
+Clone this repository into the pi users home directory
 
-Place the Adafruit APIkey in a file in the pi user home directory called apikey.txt
+Place the Adafruit APIkey in a file called apikey.txt in the repo directory
 
-Place the OpenWeatherMap API key in a file in the pi user home directory called weatherapikey.txt
+Place the OpenWeatherMap API key in a file called weatherapikey.txt in the repo directory 
 
 Install Upstart with: `sudo apt-get install upstart`
 
