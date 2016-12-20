@@ -2,7 +2,7 @@ import requests
 import json
 from Adafruit_IO import Client
 
-file = open('home/pi/Pi-Web-Status-Display/weatherapikey.txt', 'r')
+file = open('/home/pi/Pi-Web-Status-Display/weatherapikey.txt', 'r')
 
 weatherapikey = file.readline().replace("\n", '')
 
