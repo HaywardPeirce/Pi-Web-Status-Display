@@ -44,7 +44,7 @@ def run_cmd(cmd):
     return output
 
 while 1:
-    lcd.clear()
+    
     localipaddr = run_cmd(localip)
     wanipaddr = run_cmd(wanip)
     ping_str= run_cmd(ping)
@@ -53,10 +53,10 @@ while 1:
 
     	pingnum = float(run_cmd(ping))
     	if first == 0:
-	    pingavg = pingnum
-	    pingmin = pingnum
-	    pingmax = pingnum
-	    first = 1
+	        pingavg = pingnum
+	        pingmin = pingnum
+	        pingmax = pingnum
+	        first = 1
 
         count = count + 1
         if count > 1:
@@ -67,12 +67,15 @@ while 1:
 	        pingmin = pingnum
 	    
         #send the ping value to the highping function
-        highping.main(pingnum)
+        if pingnum > 100:
+            highping.main(pingnum)
 	    
         #find the local temp, using the openweathermap city ID
         localtemp = temperature.local(6174041)
 	    
-        roomtemp = temperature.room(apikey, 'temperature', 'temperature-2')
+        roomtemp = temperature.room(apikey, 'temperature')
+        
+        lcd.clear()
 	    
         lcd.setCursor(0, 0)
         lcd.message('WANIP %s' % (wanipaddr))
@@ -91,4 +94,4 @@ while 1:
         data1 = aio.receive('ping')
         print('Received value: {0}'.format(data1.value))
         
-        sleep(2)
+        sleep(10)
