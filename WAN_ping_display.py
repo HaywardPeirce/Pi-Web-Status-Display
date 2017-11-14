@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-import os
-import os.path
+import os, sys, os.path
 from subprocess import *
 from time import sleep, strftime
 from datetime import datetime
@@ -34,22 +33,29 @@ ping = "ping -q -c 1 8.8.8.8 | grep rtt | awk '{print $4}' | cut -d/ -f1"
 first = 0
 count = 0
 ping_str = 0
+localtemp = None
 
 lcd.begin(20, 4)
 
-
+#run a CLI command
 def run_cmd(cmd):
-    p = Popen(cmd, shell=True, stdout=PIPE)
-    output = p.communicate()[0]
-    return output
+    try:
+        p = Popen(cmd, shell=True, stdout=PIPE)
+        output = p.communicate()[0]
+        return output
+    except:
+        e = sys.exc_info()[0]
+        print("Unable to run command: {}".format(e))
+        return None
 
 while 1:
     
+    #lookup each of the CLI values
     localipaddr = run_cmd(localip)
     wanipaddr = run_cmd(wanip)
-    ping_str= run_cmd(ping)
+    ping_str = run_cmd(ping)
     
-    if ping_str != "":
+    if ping_str and localipaddr and wanipaddr:
 
     	pingnum = float(run_cmd(ping))
     	if first == 0:
@@ -71,7 +77,11 @@ while 1:
             highping.main(pingnum)
 	    
         #find the local temp, using the openweathermap city ID
-        localtemp = temperature.local(6174041)
+        tempTemp = temperature.local(6174041)
+        
+        #make sure that the temp was able to be looked up
+        if tempTemp != None:
+            localtemp = tempTemp
 	    
         roomtemp = temperature.room(apikey, 'temperature')
         

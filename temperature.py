@@ -1,5 +1,4 @@
-import requests
-import json
+import requests, sys, json
 from Adafruit_IO import Client
 
 file = open('home/pi/Pi-Web-Status-Display/weatherapikey.txt', 'r')
@@ -17,11 +16,20 @@ def main():
     
 def local(cityid):
     
-    requestURL = 'http://api.openweathermap.org/data/2.5/weather?id=' + str(cityid) + '&APPID=' + weatherapikey
+    #try looking up the temerature from openweathermap
+    try:
     
-    response = requests.get(requestURL)
+        requestURL = 'http://api.openweathermap.org/data/2.5/weather?id=' + str(cityid) + '&APPID=' + weatherapikey
     
-    return response.json()['main']['temp']-273.15
+        response = requests.get(requestURL)
+    
+        return response.json()['main']['temp']-273.15
+    
+    #if the temp from open weather map can't be found then return None
+    except: 
+        e = sys.exc_info()[0]
+        print("Could not retrieve temperature for openweathermap city ID {}: {}".format(cityid, e))
+        return None
     
 def room(apikey, *feeds):
     
@@ -30,8 +38,10 @@ def room(apikey, *feeds):
     aio = Client(apikey)
     
     for feed in feeds:
-        iotemp = aio.receive(feed)
-        temp.append(float(iotemp.value))
-        
+        try:
+            iotemp = aio.receive(feed)
+            temp.append(float(iotemp.value))
+        except: print("Could not retrieve temperature for feed {}".format(feed))
+            
     roomtemp = sum(temp)/len(temp)
     return roomtemp
