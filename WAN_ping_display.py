@@ -80,10 +80,13 @@ while 1:
         tempTemp = temperature.local(6174041)
         
         #make sure that the temp was able to be looked up
-        if tempTemp != None:
+        if tempTemp:
             localtemp = tempTemp
 	    
-        roomtemp = temperature.room(apikey, 'temperature')
+        tempTemp = temperature.room(apikey, 'temperature')
+        
+        if tempTemp:
+            roomtemp = tempTemp
         
         lcd.clear()
 	    
@@ -97,11 +100,27 @@ while 1:
         lcd.setCursor(0, 3)
         lcd.message('temp:%0.1f room:%0.1f' % (localtemp, roomtemp))
         
-        aio.send('wan-ip', wanipaddr)
-        aio.send('ping', pingnum)
-        data0 = aio.receive('wan-ip')
-        print('Received value: {0}'.format(data0.value))
-        data1 = aio.receive('ping')
-        print('Received value: {0}'.format(data1.value))
+        try:
+            aio.send('wan-ip', wanipaddr)
+        except:
+            e = sys.exc_info()[0]
+            print("Error sending 'wan-ip' value: {}".format(e))
+        try:
+            aio.send('ping', pingnum)
+        except:
+            e = sys.exc_info()[0]
+            print("Error sending 'ping' value: {}".format(e))
+        try:
+            data0 = aio.receive('wan-ip')
+            print('Received value: {0}'.format(data0.value))
+        except:
+            e = sys.exc_info()[0]
+            print("Error recieving 'wan-ip' value: {}".format(e))
+        try:
+            data1 = aio.receive('ping')
+            print('Received value: {0}'.format(data1.value))
+        except:
+            e = sys.exc_info()[0]
+            print("Error recieving 'ping' value: {}".format(e))
         
         sleep(10)

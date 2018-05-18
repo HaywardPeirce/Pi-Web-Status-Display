@@ -42,6 +42,10 @@ def room(apikey, *feeds):
             iotemp = aio.receive(feed)
             temp.append(float(iotemp.value))
         except: print("Could not retrieve temperature for feed {}".format(feed))
-            
-    roomtemp = sum(temp)/len(temp)
-    return roomtemp
+    
+    #if any room temp values were able to be looked up        
+    if temp:
+        roomtemp = sum(temp)/len(temp)
+        return roomtemp
+    else: return None
+    
