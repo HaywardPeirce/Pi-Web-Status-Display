@@ -12,19 +12,14 @@ Currently the system keeps track of the:
 THe metrics are then displayed on an HDD44780 compatible LCD and through Adafruit.io
 
 ### Installing the display script
-Follow the Adafruit installation guide for wiring and testing out the display
-
-Clone this repository into the pi users home directory
-
-Place the Adafruit APIkey in a file called apikey.txt in the repo directory
-
-Place the OpenWeatherMap API key in a file called weatherapikey.txt in the repo directory 
-
-Install Upstart with: `sudo apt-get install upstart`
-
-Place the networktestservice.conf file in /etc/init
-
-Reboot the Pi
+- Follow the Adafruit installation guide for wiring and testing out the display
+- Clone this repository into the pi users home directory
+- make sure that the three python scripts are executable (`sudo chmod +x WAN_ping_display.py temperature.py highping.py`)
+- Place the Adafruit APIkey in a file called apikey.txt in the repo directory
+- Place the OpenWeatherMap API key in a file called weatherapikey.txt in the repo directory 
+- Install Upstart with: `sudo apt-get install upstart`
+- Place the networktestservice.conf file in /etc/init
+- Reboot the Pi
 
 #### Installing the calculation script
 

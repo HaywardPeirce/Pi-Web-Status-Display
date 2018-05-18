@@ -17,7 +17,7 @@ Adafruit_CharLCD = imp.load_source('Adafruit_CharLCD', '/home/pi/Adafruit-Raspbe
 from Adafruit_CharLCD import Adafruit_CharLCD
 
 #Read the Adafruit API key in from file /home/pi/apikey.txt.
-file = open('./apikey.txt', 'r')
+file = open('/home/pi/Pi-Web-Status-Display/apikey.txt', 'r')
 apikey = file.readline().replace("\n", '')
 file.close()
 

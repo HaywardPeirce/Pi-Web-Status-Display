@@ -1,7 +1,7 @@
 import requests, sys, json
 from Adafruit_IO import Client
 
-file = open('home/pi/Pi-Web-Status-Display/weatherapikey.txt', 'r')
+file = open('/home/pi/Pi-Web-Status-Display/weatherapikey.txt', 'r')
 
 weatherapikey = file.readline().replace("\n", '')
 
@@ -48,4 +48,3 @@ def room(apikey, *feeds):
         roomtemp = sum(temp)/len(temp)
         return roomtemp
     else: return None
-    
