@@ -30,7 +30,7 @@ localTempID = config['INFLUXDB'].get('localTempID', fallback='29')
 pingDB = config['INFLUXDB'].get('pingdb', fallback='speedtest')
 pingValue = config['INFLUXDB'].get('pingvalue', fallback='ping')
 
-influx_client = InfluxDBClient(influxAddress, influxPort, influxUser, influxPassword, influxDatabase)
+influx_client = InfluxDBClient(influxAddress, influxPort, influxUser, influxPassword)
 
 client = InfluxDBClient('192.168.1.167', 8086, 'root', 'root', 'example')
 
