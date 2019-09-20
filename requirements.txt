@@ -1,2 +1,2 @@
-influxdb==5.2.3
-configparser==3.5.0
+influxdb>=5.2.3
+configparser>=3.5.0
