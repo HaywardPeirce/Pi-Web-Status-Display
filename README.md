@@ -11,7 +11,11 @@ Currently the system keeps track of the:
 
 THe metrics are then displayed on an HDD44780 compatible LCD and through Adafruit.io
 
-### Installing the display script
+### 
+
+The wireing guide for the display can be found in the [Adafruit Guide](https://learn.adafruit.com/drive-a-16x2-lcd-directly-with-a-raspberry-pi/wiring).
+
+### Display Software Setup
 - Follow the Adafruit installation guide for wiring and testing out the display
 - Clone this repository into the pi users home directory
 - make sure that the three python scripts are executable (`sudo chmod +x WAN_ping_display.py temperature.py highping.py`)
@@ -23,11 +27,11 @@ THe metrics are then displayed on an HDD44780 compatible LCD and through Adafrui
 
 #### Installing the calculation script
 
-Create a cron job: `crontab-e`
+~~Create a cron job: `crontab-e`~~
 
-Add a line at the bottom of the file similar to this: `* */24 * * * python /home/pi/ping_calculations.py`
+~~Add a line at the bottom of the file similar to this: `* */24 * * * python /home/pi/ping_calculations.py`~~
 
-Make sure to replace `/home/pi/ping_calculations.py` with the full location and name of the `ping_calculations.py` file 
+~~Make sure to replace `/home/pi/ping_calculations.py` with the full location and name of the `ping_calculations.py` file~~
 
 
 ### Resources

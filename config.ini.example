@@ -1,0 +1,16 @@
+[GENERAL]
+Delay = 30
+Output = False
+
+[INFLUXDB]
+Address =
+Port = 8086
+Username =
+Password =
+roomTempDB = 
+roomTempValue = 
+localTempDB = 
+localTempValue = 
+localTempID = 
+pingDB = 
+pingValue = 
