@@ -3,9 +3,11 @@ sudo apt install git wget python python-pip python-setuptools -y
 cd /home/pi/
 
 git clone https://github.com/HaywardPeirce/Adafruit-Raspberry-Pi-Python-Code.git
+cd Adafruit-Raspberry-Pi-Python-Code/
 git checkout legacy
 
 cd /home/pi/Pi-Web-Status-Display/
+git checkout influx
 
 sudo pip install virtualenv
 virtualenv -p /usr/bin/python2.7 venv

@@ -79,7 +79,7 @@ def lookupInfluxValue(query):
     if query == "roomTemp":
         client.switch_database('weather')
 
-        queryString = 'SELECT last("' + roomTempValue + '") FROM "' + roomTempDB + ''"'
+        queryString = 'SELECT last("' + roomTempValue + '") FROM "' + roomTempDB + '"'
 
         results = client.query(queryString)
         points = results.get_points()
