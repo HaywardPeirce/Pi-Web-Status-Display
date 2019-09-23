@@ -139,39 +139,47 @@ def main():
     #lookup each of the CLI values
     # localipaddr = run_cmd(localip)
     
-    wanipaddr = None
-    
-    try:
-        wanipaddr = run_cmd(wanip)
-    except:
-        print("Unable to retrieve WAN IP address.")
-    
-    try:
-        roomTemp = lookupInfluxValue("roomTemp")
-        localTemp = lookupInfluxValue("localTemp")
+    while True:
 
-        pingInfo = lookupInfluxValue("ping")
-    except:
-        print("Unable to retrieve values from InfluxDB")
-
-    try:
-
-        lcd.clear()
+        wanipaddr = None
         
-        lcd.setCursor(0, 0)
-        lcd.message('WANIP %s' % (wanipaddr))
+        try:
+            wanipaddr = run_cmd(wanip)
+        except:
+            e = sys.exc_info()[0]
+            print("Unable to retrieve WAN IP address: {}".format(e))
+        
+        try:
+            roomTemp = lookupInfluxValue("roomTemp")
+            localTemp = lookupInfluxValue("localTemp")
 
-        lcd.setCursor(0, 1)
-        lcd.message('Ping %0.2f' % (pingInfo['ping']))
-        lcd.setCursor(0, 2)
-        lcd.message('%0.2f %0.2f %0.2f' % (pingInfo['pingavg'], pingInfo['pingmin'], pingInfo['pingmax']))
-        lcd.setCursor(0, 3)
-        lcd.message('temp:%0.1f room:%0.1f' % (localTemp, roomTemp))
+            pingInfo = lookupInfluxValue("ping")
+        except:
+            e = sys.exc_info()[0]
+            print("Unable to retrieve values from InfluxDB: {}".format(e))
 
-    except:
-        print("Unable to display data to screen.")
-    
-    sleep(delay)
+        try:
+
+            lcd.clear()
+            
+            lcd.setCursor(0, 0)
+            lcd.message('WANIP %s' % (wanipaddr))
+
+            lcd.setCursor(0, 1)
+            if pingInfo['ping']:
+                lcd.message('Ping %0.2f' % (pingInfo['ping']))
+            lcd.setCursor(0, 2)
+            if pingInfo['pingavg'] and pingInfo['pingmin'] and pingInfo['pingmax']:
+                lcd.message('%0.2f %0.2f %0.2f' % (pingInfo['pingavg'], pingInfo['pingmin'], pingInfo['pingmax']))
+            lcd.setCursor(0, 3)
+            if localTemp and roomTemp:
+                lcd.message('temp:%0.1f room:%0.1f' % (localTemp, roomTemp))
+
+        except:
+            e = sys.exc_info()[0]
+            print("Unable to display data to screen: {}".format(e))
+        
+        sleep(delay)
 
 if __name__ == '__main__':
     main()
