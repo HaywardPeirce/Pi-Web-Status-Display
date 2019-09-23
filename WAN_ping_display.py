@@ -93,6 +93,8 @@ def lookupInfluxValue(query):
         return temp
 
     elif query == "localTemp":
+
+        client.switch_database('weather')
         queryString = 'SELECT last("' + localTempValue + '") FROM "' + localTempDB + '" WHERE ("stationId" = '+ "'" + localTempID +"'" +')'
 
         results = client.query(queryString)
