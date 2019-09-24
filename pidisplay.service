@@ -4,12 +4,12 @@ Requires=network-online.target
 After=network-online.target
  
 [Service]
-ExecStart=/home/pi/Pi-Web-Status-Display/venv/bin/python WAN_ping_display.py
-WorkingDirectory=/home/pi
+ExecStart=/home/pi/Pi-Web-Status-Display/venv/bin/python /home/pi/Pi-Web-Status-Display/WAN_ping_display.py
+WorkingDirectory=/home/pi/Pi-Web-Status-Display
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
 User=pi
  
 [Install]
-WantedBy=network-online.target
+WantedBy=multi-user.target
