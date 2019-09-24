@@ -114,13 +114,15 @@ def lookupInfluxValue(query):
 
         # results = client.query('SELECT last("temperature") FROM "housetemps" WHERE time > now() - 5m')
         results = client.query('SELECT "' + pingTempValue + '" FROM "' + pingDB + '" WHERE time > now() - 1h')
+        
+        print(results.raw)
         points = results.get_points()
 
         last = None
         pings = []
 
         for point in points:
-
+            print(point)
             pings.append(point['ping'])
             last = point['ping']
 
