@@ -33,6 +33,10 @@ The wireing guide for the display can be found in the [Adafruit Guide](https://l
 
 ~~Make sure to replace `/home/pi/ping_calculations.py` with the full location and name of the `ping_calculations.py` file~~
 
+1. Clone this repo into the home directory on the pi
+2. Run setup.sh: `bash setup.sh`
+3. update the `config.ini` file to include the details of your specific setup
+4. reboot
 
 ### Resources
 THe main reference for this project was the Adafruit LCD guide: https://learn.adafruit.com/drive-a-16x2-lcd-directly-with-a-raspberry-pi/overview

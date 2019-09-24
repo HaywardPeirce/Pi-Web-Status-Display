@@ -12,7 +12,9 @@ git checkout influx
 sudo pip install virtualenv
 virtualenv -p /usr/bin/python2.7 venv
 source venv/bin/activate
-sudo pip install -r requirements.txt
+pip install -r requirements.txt
+
+cp config.ini.example config.ini
 
 sudo chmod +x WAN_ping_display.py
 sudo cp pidisplay.service /etc/systemd/system/pidisplay.service

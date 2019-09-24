@@ -87,7 +87,7 @@ def lookupInfluxValue(query):
         temp = None
         for point in points:
 
-            print(point["last"])
+            # print(point["last"])
             temp = float(point["last"])
 
         return temp
@@ -103,7 +103,7 @@ def lookupInfluxValue(query):
         temp = None
         for point in points:
 
-            print(point["last"])
+            # print(point["last"])
             temp = float(point["last"])
 
         return temp
@@ -122,7 +122,7 @@ def lookupInfluxValue(query):
         pings = []
 
         for point in points:
-            print(point['ping'])
+            # print(point['ping'])
             pings.append(point['ping'])
             last = point['ping']
 
