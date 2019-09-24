@@ -42,14 +42,14 @@ import imp
 Adafruit_CharLCD = imp.load_source('Adafruit_CharLCD', '/home/pi/Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/Adafruit_CharLCD.py')
 from Adafruit_CharLCD import Adafruit_CharLCD
 
-#Read the Adafruit API key in from file /home/pi/apikey.txt.
-# file = open('/home/pi/Pi-Web-Status-Display/apikey.txt', 'r')
-# apikey = file.readline().replace("\n", '')
-# file.close()
+# #Read the Adafruit API key in from file /home/pi/apikey.txt.
+# # file = open('/home/pi/Pi-Web-Status-Display/apikey.txt', 'r')
+# # apikey = file.readline().replace("\n", '')
+# # file.close()
 
-# Import library and create instance of REST client.
-# from Adafruit_IO import Client
-# aio = Client(apikey)
+# # Import library and create instance of REST client.
+# # from Adafruit_IO import Client
+# # aio = Client(apikey)
 
 lcd = Adafruit_CharLCD()
 
@@ -103,7 +103,7 @@ def lookupInfluxValue(query):
         temp = None
         for point in points:
 
-            print(point)
+            print(point["last"])
             temp = float(point["last"])
 
         return temp
@@ -115,14 +115,14 @@ def lookupInfluxValue(query):
         # results = client.query('SELECT last("temperature") FROM "housetemps" WHERE time > now() - 5m')
         results = client.query('SELECT "' + pingValue + '" FROM "' + pingDB + '" WHERE time > now() - 1h')
         
-        print(results.raw)
+        # print(results.raw)
         points = results.get_points()
 
         last = None
         pings = []
 
         for point in points:
-            print(point)
+            print(point['ping'])
             pings.append(point['ping'])
             last = point['ping']
 
@@ -156,6 +156,8 @@ def main():
             localTemp = lookupInfluxValue("localTemp")
 
             pingInfo = lookupInfluxValue("ping")
+        except NameError as err:
+            print("Unable to retrieve values from InfluxDB: {}".format(err))
         except:
             e = sys.exc_info()[0]
             print("Unable to retrieve values from InfluxDB: {}".format(e))
