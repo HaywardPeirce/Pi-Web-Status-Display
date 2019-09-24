@@ -113,7 +113,7 @@ def lookupInfluxValue(query):
         client.switch_database('speedtests')
 
         # results = client.query('SELECT last("temperature") FROM "housetemps" WHERE time > now() - 5m')
-        results = client.query('SELECT "' + pingTempValue + '" FROM "' + pingDB + '" WHERE time > now() - 1h')
+        results = client.query('SELECT "' + pingValue + '" FROM "' + pingDB + '" WHERE time > now() - 1h')
         
         print(results.raw)
         points = results.get_points()
